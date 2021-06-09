@@ -58,4 +58,20 @@ public class ApiTests {
 
         response.log().body();
     }
+
+    // DELETE Request
+    @Test
+    public void deleteProduct(){
+        String endpoint = "http://localhost:80/api_testing/product/delete.php";
+        String body = "{\"id\": 1000}";
+
+        ValidatableResponse response =
+                given()
+                        .body(body)
+                        .when()
+                        .delete(endpoint)
+                        .then();
+
+        response.log().body();
+    }
 }
