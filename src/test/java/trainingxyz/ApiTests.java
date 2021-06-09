@@ -26,10 +26,11 @@ public class ApiTests {
         response.log().body();
     }
 
+    // POST request
     @Test
     public void createProduct(){
         String endpoint = "http://localhost:80/api_testing/product/create.php";
-        String body = "{\"name\":\"Water Bottle\",\"price\":12,\"description\":\"The Product is really great\",\"category_id\":3}";
+        String body = "{\"name\":\"Water Bottle\"\"name\":\"Water Bottle\",\"price\":12,\"description\":\"The Product is really great\",\"category_id\":3}";
 
         ValidatableResponse response =
                 given()
@@ -40,5 +41,21 @@ public class ApiTests {
 
         response.log().body();
 
+    }
+
+    // PUT request
+    @Test
+    public void updateProduct(){
+        String endpoint = "http://localhost:80/api_testing/product/update.php";
+        String body = "{\"id\": 1000,\"name\":\"Water Bottle\",\"price\":15,\"description\":\"Blue Water Bottle\",\"category_id\":3}";
+
+        ValidatableResponse response =
+                given()
+                        .body(body)
+                        .when()
+                        .put(endpoint)
+                        .then();
+
+        response.log().body();
     }
 }
