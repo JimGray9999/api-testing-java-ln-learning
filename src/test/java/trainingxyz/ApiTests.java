@@ -1,6 +1,7 @@
 package trainingxyz;
 
 import io.restassured.response.ValidatableResponse;
+import models.Product;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -73,5 +74,28 @@ public class ApiTests {
                         .then();
 
         response.log().body();
+    }
+
+    // POST request using Product model
+    @Test
+    public void createSerializedProduct(){
+        String endpoint = "http://localhost:80/api_testing/product/create.php";
+
+        Product product = new Product(
+                "Water Bottle",
+                "Blue water bottle. Holds 64 oz.",
+                12,
+                3
+        );
+
+        ValidatableResponse response =
+                given()
+                        .body(product)
+                        .when()
+                        .post(endpoint)
+                        .then();
+
+        response.log().body();
+
     }
 }
